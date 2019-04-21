@@ -130,7 +130,8 @@ app.datepicker = function (param) {
         formatDate: 'd.m.Y',
         format:'d-M-Y',
         timepicker:false,
-        closeOnDateSelect:true
+        closeOnDateSelect:true,
+        maxDate:0
     });
 }
 
