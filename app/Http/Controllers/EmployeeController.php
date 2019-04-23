@@ -227,4 +227,20 @@ class EmployeeController extends Controller
         }
         echo 1;
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     * @throws \Exception
+     * @throws \Throwable
+     * @author Nikhil.Jain
+     */
+    public function getEmployeeList(Request $request) {
+        $employeeDetails = Employee::getEmployeeList($request->id);
+        $return['employeeCountWithHighestSalary'] = count($employeeDetails['employeeDetailWithHighestSalary']);
+        $return['countYoungestEmployees'] = count($employeeDetails['youngestEmployees']);
+        $return['employeeDetailWithHighestSalary'] = view('datatable.ajax_html', ['mode' => "highest_salary",'employeeDetailWithHighestSalary' => $employeeDetails['employeeDetailWithHighestSalary']])->render();
+        $return['youngestEmployees'] = view('datatable.ajax_html', ['mode' => "youngest_employee",'youngestEmployees' => $employeeDetails['youngestEmployees']])->render();
+        return $return;
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Contract\DepartmentInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,9 +13,11 @@ class DashboardController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    protected $department;
+    public function __construct(DepartmentInterface $departmentInterface)
     {
         $this->middleware(['auth', 'checkRole']);
+        $this->department = $departmentInterface;
     }
 
     /**
@@ -25,6 +28,8 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('dashboard')->with('dashboardTab', 'active');
+        $data['dashboardTab'] = 'active';
+        $data['departmentData'] = $this->department->getCollection();
+        return view('dashboard',$data);
     }
 }

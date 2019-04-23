@@ -3,6 +3,7 @@
 namespace App\Http\Facades\Repository;
 use App\Repositories\Contract\EmployeeInterface;
 use App\Repositories\Contract\DepartmentInterface;
+use Carbon\Carbon;
 
 /**
  * Class EmployeeFacadeClass
@@ -137,5 +138,34 @@ class EmployeeFacadeClass
      */
     public function deleteEmployee($id) {
         return $this->employee->deleteEmployee($id);
+    }
+
+    /**
+     * @param $id
+     * @return array
+     * @author Nikhil.Jain
+     */
+    public function getEmployeeList($id) {
+        $employeeDetailWithHighestSalary = $this->employee->getEmployeeDetailWithHighestSalary($id);
+        $youngestEmployees = $this->employee->getYoungestEmployees($id);
+        if(!empty($youngestEmployees)) {
+            foreach ($youngestEmployees as $employee) {
+                $employee->age = $this->getAge($employee->dob);
+            }
+        }
+
+        $return['employeeDetailWithHighestSalary'] = $employeeDetailWithHighestSalary;
+        $return['youngestEmployees'] = $youngestEmployees;
+        return $return;
+    }
+
+    /**
+     * @param $dob
+     * @return string
+     * @author Nikhil.Jain
+     */
+    public function getAge($dob) {
+        $years = Carbon::parse($dob)->age. " year old";
+        return $years;
     }
 }

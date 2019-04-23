@@ -144,4 +144,22 @@ class EmployeeRepository implements EmployeeInterface
             return false;
 
     }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Support\Collection
+     */
+    public function getEmployeeDetailWithHighestSalary($id) {
+        $maxSalary = Employee::where('department_id',$id)->max('salary');
+        return Employee::where('department_id',$id)->where('salary',$maxSalary)->get();
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Support\Collection
+     */
+    public function getYoungestEmployees($id) {
+        $minDob = Employee::where('department_id',$id)->min('dob');
+        return Employee::where('department_id',$id)->where('dob',$minDob)->get();
+    }
 }

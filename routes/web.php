@@ -82,6 +82,7 @@ Route::group(array('prefix' => 'department','Permission'=>"department_management
     Route::post('update', ['as' => 'updateDepartment', 'uses' => 'DepartmentController@update']);
     Route::post('change_status', ['uses' => 'DepartmentController@changeStatus']);
     Route::post('datatable', ['uses' => 'DepartmentController@datatable']);
+    Route::post('employee_list', ['uses' => 'EmployeeController@getEmployeeList']);
 });
 
 Route::group(array('prefix' => 'employee','Permission'=>"employee_management", 'as' => 'employee::'), function() {
