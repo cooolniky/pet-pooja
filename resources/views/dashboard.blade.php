@@ -18,7 +18,8 @@
     <div class="be-content">
         <div class="page-head">
             <div class="form-group">
-                <div class="col-sm-6 col-md-4">
+                <label class="col-md-2 control-label" style="font-weight: bold; font-size: 14px;">Select {{trans('app.department')}}</label>
+                <div class="col-sm-6 col-md-3">
                     <select class="form-control input-sm" name="department_id" id="department_id">
                         <option value="0">{{trans('app.select')}} {{trans('app.department')}}</option>
                         @if(!empty($departmentData))
