@@ -150,8 +150,8 @@ class EmployeeRepository implements EmployeeInterface
      * @return \Illuminate\Support\Collection
      */
     public function getEmployeeDetailWithHighestSalary($id) {
-        $maxSalary = Employee::where('department_id',$id)->max('salary');
-        return Employee::where('department_id',$id)->where('salary',$maxSalary)->get();
+        $maxSalary = Employee::where('department_id',$id)->where('status',1)->max('salary');
+        return Employee::where('department_id',$id)->where('salary',$maxSalary)->where('status',1)->get();
     }
 
     /**
@@ -159,7 +159,7 @@ class EmployeeRepository implements EmployeeInterface
      * @return \Illuminate\Support\Collection
      */
     public function getYoungestEmployees($id) {
-        $minDob = Employee::where('department_id',$id)->min('dob');
-        return Employee::where('department_id',$id)->where('dob',$minDob)->get();
+        $minDob = Employee::where('department_id',$id)->where('status',1)->min('dob');
+        return Employee::where('department_id',$id)->where('status',1)->where('dob',$minDob)->get();
     }
 }
