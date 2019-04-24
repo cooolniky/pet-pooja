@@ -159,7 +159,7 @@ class EmployeeRepository implements EmployeeInterface
      * @return \Illuminate\Support\Collection
      */
     public function getYoungestEmployees($id) {
-        $minDob = Employee::where('department_id',$id)->where('status',1)->min('dob');
+        $minDob = Employee::where('department_id',$id)->where('status',1)->max('dob');
         return Employee::where('department_id',$id)->where('status',1)->where('dob',$minDob)->get();
     }
 }
